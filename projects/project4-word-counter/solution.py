@@ -1,17 +1,16 @@
 # Project 4 — Word Counter
-# Author: your name here
+# Author: Samuel Aguado
 
-sentence = input("Enter a sentence: ")
-words = sentence.lower().split()
+text = input("Enter a sentence: ")
 
-# TODO: total word count using len()
+# Convertir a minúsculas y quitar espacios extra
+words = text.lower().split()
 
-# TODO: character count (no spaces)
-# Hint: sentence.replace(" ", "") removes all spaces, then use len()
+word_count = {}
 
-# TODO: word frequency dictionary
-# frequency = {}
-# for word in words:
-#     ...
+for word in words:
+    word_count[word] = word_count.get(word, 0) + 1
 
-# TODO: print total words, total characters, then word frequency
+print("\n=== Word Frequency ===")
+for word, count in word_count.items():
+    print(f"{word}: {count}")
