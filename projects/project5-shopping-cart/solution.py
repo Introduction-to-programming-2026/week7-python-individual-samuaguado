@@ -1,35 +1,40 @@
-# Project 5 — Mini Shopping Cart
-# Author: your name here
+# Project 5 — Shopping Cart
+# Author: Samuel Aguado
 
-menu = {
-    1: ("Apple",  0.50),
-    2: ("Banana", 0.30),
-    3: ("Milk",   1.20),
-    4: ("Bread",  2.00),
-}
+cart = {}
 
-cart  = {}   # { item_name: quantity }
-total = 0.0
+print("Welcome to the Shopping Cart!")
+print("Type 'done' to finish.\n")
 
-# TODO: display the menu
-# print("--- Shop Menu ---")
-# for number, (name, price) in menu.items():
-#     print(f"{number}. {name:<10} ${price:.2f}")
-# print("5. Done")
+while True:
+    item = input("Enter item name: ").strip()
 
-# TODO: shopping loop
-# while True:
-#     choice = int(input("\nChoose an item (1-5): "))
-#     if choice == 5:
-#         break
-#     if choice in menu:
-#         ...add to cart, update total...
-#     else:
-#         print("Invalid choice, try again.")
+    if item.lower() == "done":
+        break
 
-# TODO: print the receipt
-# print("\n--- Receipt ---")
-# for item, qty in cart.items():
-#     ...
-# print(f"Total: ${total:.2f}")
-# print("Thank you!")
+    if item == "":
+        print("Item name cannot be empty.")
+        continue
+
+    try:
+        price = float(input("Enter price: "))
+        quantity = int(input("Enter quantity: "))
+    except ValueError:
+        print("Invalid input. Please enter numbers.")
+        continue
+
+    if item in cart:
+        cart[item]["quantity"] += quantity
+    else:
+        cart[item] = {"price": price, "quantity": quantity}
+
+print("\n=== Shopping Cart Summary ===")
+
+total = 0
+
+for item, data in cart.items():
+    subtotal = data["price"] * data["quantity"]
+    total += subtotal
+    print(f"{item}: {data['quantity']} x {data['price']:.2f} = {subtotal:.2f}")
+
+print(f"\nTotal: {total:.2f}")
